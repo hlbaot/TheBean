@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import logo from '../public/img/logo.jpg'
+import logo from '../public/img/logo.png'
 import { usePathname, useRouter } from 'next/navigation'
 import GridPageTransition from '../public/layerLoad/layer'
 import { useState, useEffect } from 'react'

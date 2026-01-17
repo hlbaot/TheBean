@@ -8,9 +8,6 @@ import Footer from '@/app/components/Footer'
 export const metadata: Metadata = {
   title: 'THE BEAN - Specialty Coffee',
   description: 'A celebration of specialty coffee and the timeless moments shared over a perfect cup.',
-  icons: {
-    icon: '/img/logo.jpg',
-  },
 }
 
 export default function RootLayout({

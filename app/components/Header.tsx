@@ -1,5 +1,7 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
+import logo from '../public/img/logo.jpg'
 import { usePathname, useRouter } from 'next/navigation'
 import GridPageTransition from '../public/layerLoad/layer'
 import { useState, useEffect } from 'react'
@@ -38,8 +40,14 @@ export default function Header() {
               onClick={() => navigateWithTransition('/')}
               className="flex items-center space-x-2"
             >
-              <div className="w-8 h-8 bg-brown-800 rounded-full flex items-center justify-center">
-                <span className="text-white text-xs font-bold">☕</span>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden">
+                <Image
+                  src={logo}
+                  alt="THE BEAN Logo"
+                  width={40}
+                  height={40}
+                  className="object-cover"
+                />
               </div>
               <span className="font-serif text-2xl font-bold text-brown-900">
                 THE BEAN

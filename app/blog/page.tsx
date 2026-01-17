@@ -1,7 +1,22 @@
+'use client'
+import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import AOS from 'aos'
+import blog1 from '../public/img/blog1.jpg'
+import blog2 from '../public/img/blog2.jpg'
+import blog3 from '../public/img/blog3.jpg'
 
 export default function Blog() {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+    });
+  }, []);
+
   const articles = [
     {
       id: 1,
@@ -9,7 +24,7 @@ export default function Blog() {
       date: 'OCT 18',
       title: 'Mastering the Pour Over: A Ritual of Patience',
       description: 'The geometry of water flow and the science of extraction, simplified for your...',
-      image: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=600&q=80',
+      image: blog1,
     },
     {
       id: 2,
@@ -17,7 +32,7 @@ export default function Blog() {
       date: 'OCT 12',
       title: 'Behind the Bean: Our Ethiopian Yirgacheffe',
       description: 'Tracing the bright acidity and floral jasmine notes back to the high altitudes of Gedeo.',
-      image: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=600&q=80',
+      image: blog2,
     },
     {
       id: 3,
@@ -25,7 +40,7 @@ export default function Blog() {
       date: 'OCT 05',
       title: 'Morning Rituals: Finding Stillness in the Steam',
       description: 'Why the first cup of the day is more than just caffeine—its a moment of intentionality.',
-      image: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=600&q=80',
+      image: blog3,
     },
   ]
 
@@ -67,11 +82,11 @@ export default function Blog() {
               The Story of Our Signature Lavender Honey Latte
             </h2>
             <p className="text-brown-600 mb-6 leading-relaxed">
-              A journey through the fields of Provence to the local hives of Northern California. 
-              Discover how we balanced delicate floral notes with the robust profile of our house 
+              A journey through the fields of Provence to the local hives of Northern California.
+              Discover how we balanced delicate floral notes with the robust profile of our house
               espresso to create a timeless classic.
             </p>
-            <Link 
+            <Link
               href="/blog/lavender-honey-latte"
               className="text-brown-700 hover:text-brown-900 inline-flex items-center space-x-2 transition-colors"
             >
@@ -86,10 +101,11 @@ export default function Blog() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {articles.map((article) => (
-            <Link 
-              key={article.id} 
+            <Link
+              key={article.id}
               href={`/blog/article-${article.id}`}
               className="group"
+              data-aos="zoom-in"
             >
               <div className="relative h-64 rounded-lg overflow-hidden mb-4">
                 <Image

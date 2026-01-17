@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
-import './globals.css'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import './public/css/globals.css'
+import 'aos/dist/aos.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from '@/app/components/Header'
+import Footer from '@/app/components/Footer'
 
 export const metadata: Metadata = {
   title: 'THE BEAN - Specialty Coffee',

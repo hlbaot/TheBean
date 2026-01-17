@@ -1,6 +1,35 @@
+'use client'
 import Image from 'next/image'
+import { useEffect, useState } from "react";
+import { motion } from 'framer-motion';
+import AOS from 'aos';
 
 export default function Heritage() {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+    });
+  }, []);
+
+  const text = 'Our Core Pillars';
+  const [animationTime, setAnimationTime] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimationTime((prev) => prev + 0.1);
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+    });
+  }, []);
   return (
     <div className="bg-cream-50 min-h-screen">
       {/* Hero Section */}
@@ -17,7 +46,7 @@ export default function Heritage() {
             />
           </div>
         </div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
           <p className="text-white text-sm uppercase tracking-widest mb-4">SINCE 1992</p>
           <h1 className="heading-serif text-white">
@@ -30,7 +59,7 @@ export default function Heritage() {
       <section className="bg-cream-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="heading-serif-md mb-4">A Legacy of Passion</h2>
+            <h2 data-aos="zoom-out-down" data-aos-delay="100" className="heading-serif-md mb-4">A Legacy of Passion</h2>
             <p className="subtitle text-brown-500">OUR ORIGIN STORY</p>
           </div>
 
@@ -50,7 +79,7 @@ export default function Heritage() {
               <p className="text-lg mb-6">
                 We believe coffee is more than a simple morning ritual; it is an artisanal craft that bridges cultures. Our commitment to quality means sourcing only the finest beans through direct trade partnerships that honor the land and the people. Today, THE BEAN stands as a testament to three decades of uncompromising standards. Every cup we pour is a tribute to the farmers who cultivate the soil and the artisans who master the flame.
               </p>
-              
+
               {/* Embedded Image */}
               <div className="relative h-64 rounded-lg overflow-hidden mt-8">
                 <Image
@@ -68,7 +97,7 @@ export default function Heritage() {
       {/* Key Milestones Section */}
       <section className="bg-cream-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="heading-serif-md text-center mb-16">Key Milestones</h2>
+          <h2 data-aos="zoom-out-down" data-aos-delay="100" className="heading-serif-md text-center mb-16">Key Milestones</h2>
 
           <div className="max-w-4xl mx-auto">
             {/* Timeline Container */}
@@ -80,7 +109,7 @@ export default function Heritage() {
               <div className="space-y-20">
                 {/* 1992 - Left */}
                 <div className="relative flex items-center">
-                  <div className="w-1/2 pr-8 text-right">
+                  <div data-aos="fade-right" data-aos-delay="100" className="w-1/2 pr-8 text-right">
                     <div className="text-amber-500 font-serif text-2xl mb-2">1992</div>
                     <h3 className="text-xl font-serif font-bold text-brown-900 mb-2">The First Roast</h3>
                     <p className="text-brown-600 leading-relaxed">
@@ -97,7 +126,7 @@ export default function Heritage() {
                   <div className="w-1/2 pr-8"></div>
                   {/* Timeline Dot */}
                   <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-amber-500 border-4 border-cream-100 z-10"></div>
-                  <div className="w-1/2 pl-8 text-left">
+                  <div data-aos="fade-left" data-aos-delay="200" className="w-1/2 pl-8 text-left">
                     <div className="text-amber-500 font-serif text-2xl mb-2">2005</div>
                     <h3 className="text-xl font-serif font-bold text-brown-900 mb-2">Flagship Boutique</h3>
                     <p className="text-brown-600 leading-relaxed">
@@ -108,7 +137,7 @@ export default function Heritage() {
 
                 {/* 2010 - Left */}
                 <div className="relative flex items-center">
-                  <div className="w-1/2 pr-8 text-right">
+                  <div data-aos="fade-right" data-aos-delay="300" className="w-1/2 pr-8 text-right">
                     <div className="text-amber-500 font-serif text-2xl mb-2">2010</div>
                     <h3 className="text-xl font-serif font-bold text-brown-900 mb-2">Direct Trade Initiative</h3>
                     <p className="text-brown-600 leading-relaxed">
@@ -125,7 +154,7 @@ export default function Heritage() {
                   <div className="w-1/2 pr-8"></div>
                   {/* Timeline Dot */}
                   <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-amber-500 border-4 border-cream-100 z-10"></div>
-                  <div className="w-1/2 pl-8 text-left">
+                  <div data-aos="fade-left" data-aos-delay="400" className="w-1/2 pl-8 text-left">
                     <div className="text-amber-500 font-serif text-2xl mb-2">2022</div>
                     <h3 className="text-xl font-serif font-bold text-brown-900 mb-2">30-Year Jubilee</h3>
                     <p className="text-brown-600 leading-relaxed">
@@ -142,11 +171,30 @@ export default function Heritage() {
       {/* Our Core Pillars Section */}
       <section className="bg-cream-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="heading-serif-md text-center mb-16">Our Core Pillars</h2>
+          <h2 className="heading-serif-md mb-12 text-center">
+            {text.split('').map((char, i) => {
+              const yOffset = Math.sin(animationTime + i * 0.3) * 8;
 
+              return (
+                <motion.span
+                  key={i}
+                  animate={{ y: yOffset }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 30,
+                    mass: 0.8,
+                  }}
+                  className="inline-block"
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </motion.span>
+              );
+            })}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Card 1: Ethical Sourcing */}
-            <div className="bg-white rounded-lg p-8 shadow-sm">
+            <div className="bg-white rounded-lg p-8 shadow-sm" data-aos="fade-up" data-aos-delay="100">
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                 <div className="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center">
                   <span className="text-3xl">🍃</span>
@@ -159,7 +207,7 @@ export default function Heritage() {
             </div>
 
             {/* Card 2: Artisanal Craft */}
-            <div className="bg-white rounded-lg p-8 shadow-sm">
+            <div className="bg-white rounded-lg p-8 shadow-sm" data-aos="fade-up" data-aos-delay="200">
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                 <div className="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center">
                   <span className="text-3xl">☕</span>
@@ -172,7 +220,7 @@ export default function Heritage() {
             </div>
 
             {/* Card 3: Community */}
-            <div className="bg-white rounded-lg p-8 shadow-sm">
+            <div className="bg-white rounded-lg p-8 shadow-sm" data-aos="fade-up" data-aos-delay="300">
               <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                 <div className="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center">
                   <span className="text-3xl">🤝</span>

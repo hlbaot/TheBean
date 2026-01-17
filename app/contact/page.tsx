@@ -1,7 +1,50 @@
+'use client'
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Contact() {
+  const text = "WE'D LOVE TO HEAR FROM YOU";
+
+  const speed = 80;
+  const deleteSpeed = 40;
+  const pauseDuration = 1800;
+  const loop = true;
+  const showCursor = true;
+
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
+    if (isPaused) {
+      timeout = setTimeout(() => {
+        setIsPaused(false);
+        if (loop) setIsDeleting(true);
+      }, pauseDuration);
+    } else if (isDeleting) {
+      if (displayText.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayText(text.substring(0, displayText.length - 1));
+        }, deleteSpeed);
+      } else {
+        setIsDeleting(false);
+      }
+    } else {
+      if (displayText.length < text.length) {
+        timeout = setTimeout(() => {
+          setDisplayText(text.substring(0, displayText.length + 1));
+        }, speed);
+      } else if (loop) {
+        setIsPaused(true);
+      }
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, isPaused]);
   return (
     <div>
       {/* Hero Section */}
@@ -16,10 +59,21 @@ export default function Contact() {
             />
           </div>
         </div>
-        
+
         <div className="relative z-10 text-center">
           <h1 className="heading-serif text-white mb-4">Get in Touch</h1>
-          <p className="text-white text-lg uppercase tracking-widest">WE'D LOVE TO HEAR FROM YOU</p>
+          <p className="text-white text-lg uppercase tracking-widest font-mono">
+            {displayText}
+            {showCursor && (
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
+                className="ml-1"
+              >
+                |
+              </motion.span>
+            )}
+          </p>
         </div>
       </section>
 
@@ -33,7 +87,7 @@ export default function Contact() {
               <p className="text-brown-600 mb-8 leading-relaxed">
                 Whether you have a question about our beans or just want to say hi, our door is always open.
               </p>
-              
+
               <form className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-brown-800 mb-2 uppercase tracking-wider">
@@ -45,7 +99,7 @@ export default function Contact() {
                     className="w-full px-4 py-3 bg-transparent border-b-2 border-brown-300 focus:border-brown-800 focus:outline-none transition-colors"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-brown-800 mb-2 uppercase tracking-wider">
                     EMAIL ADDRESS
@@ -56,7 +110,7 @@ export default function Contact() {
                     className="w-full px-4 py-3 bg-transparent border-b-2 border-brown-300 focus:border-brown-800 focus:outline-none transition-colors"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-brown-800 mb-2 uppercase tracking-wider">
                     MESSAGE
@@ -67,7 +121,7 @@ export default function Contact() {
                     className="w-full px-4 py-3 bg-transparent border-b-2 border-brown-300 focus:border-brown-800 focus:outline-none transition-colors resize-none"
                   />
                 </div>
-                
+
                 <button type="submit" className="btn-primary w-full sm:w-auto">
                   SEND MESSAGE
                 </button>
@@ -77,7 +131,7 @@ export default function Contact() {
             {/* Right: Contact Information */}
             <div>
               <h2 className="heading-serif-md mb-8">Visit Us</h2>
-              
+
               <div className="space-y-8 mb-8">
                 {/* Location */}
                 <div className="flex items-start space-x-4">
@@ -143,8 +197,8 @@ export default function Contact() {
             <h3 className="text-2xl font-serif font-bold text-brown-900 mb-4">
               Find us in the heart of the city
             </h3>
-            <Link 
-              href="https://maps.google.com" 
+            <Link
+              href="https://maps.google.com"
               target="_blank"
               className="inline-block text-brown-800 uppercase tracking-wider font-medium hover:text-brown-900 transition-colors"
             >

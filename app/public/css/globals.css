@@ -6,26 +6,60 @@
   body {
     @apply bg-cream-50 text-brown-900;
   }
+
+  a {
+    @apply no-underline;
+    text-decoration: none !important;
+  }
 }
 
 @layer components {
   .btn-primary {
     @apply bg-brown-800 text-white px-6 py-3 rounded-lg font-medium uppercase tracking-wider hover:bg-brown-700 transition-colors;
   }
-  
+
   .btn-secondary {
     @apply bg-white text-brown-800 px-6 py-3 rounded-lg font-medium uppercase tracking-wider border-2 border-brown-800 hover:bg-brown-50 transition-colors;
   }
-  
+
   .heading-serif {
     @apply font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-brown-900;
   }
-  
+
   .heading-serif-md {
     @apply font-serif text-3xl md:text-4xl font-bold text-brown-900;
   }
-  
+
   .subtitle {
     @apply text-brown-600 text-sm uppercase tracking-widest font-medium;
+  }
+}
+
+/* Custom Carousel Indicators */
+.carousel-indicators [data-bs-target] {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  margin: 0 6px !important;
+  background-color: #fff !important;
+  opacity: 0.5 !important;
+  border: none !important;
+}
+
+.carousel-indicators .active {
+  opacity: 1 !important;
+  transform: scale(1.2);
+}
+
+/* Setup custom property and animation for spinning border effect */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes shimmer-spin {
+  to {
+    --angle: 360deg;
   }
 }
